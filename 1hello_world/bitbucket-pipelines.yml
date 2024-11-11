@@ -1,0 +1,20 @@
+image: node:16 # Use a Node.js Docker image
+
+pipelines:
+  default:
+    - step:
+        name: Build and Test
+        caches:
+          - node
+        script:
+          - npm install # Install dependencies
+          - npm test # Run tests (optional)
+          - npm run build # Build the React app
+        artifacts:
+          - build/** # Keep the build output for further steps (if needed)
+
+    - step:
+        name: Deploy
+        deployment: production # Deployment environment (optional)
+        script:
+          - echo "Deploying React app" # Replace with your deployment script or command
